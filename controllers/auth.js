@@ -7,16 +7,18 @@ require('dotenv').config();
 
 exports.signup = async (req, res) => {
   const user = new User(req.body);
+  console.log(user);
   try {
     const data = await user.save();
+    
     if (!data) {
       return res.status(400).json({
         error: errorHandler(err),
       });
     }
 
-    user.salt = undefined;
-    user.hashed_password = undefined;
+    // user.salt = undefined;
+    // user.hashed_password = undefined;
     res.json({
       user,
     });
